@@ -307,14 +307,18 @@ const useSearch = (emit, leftList, companyQuery, props) => {
         // 1、代码
         if (!isNaN(Number(searchValue.value))) {
           leftList.value = allList.filter((item) => {
-            return item[props.keyField].includes(searchValue.value) || searchValue.value.includes(item[props.keyField])
+            return item[props.keyField].includes(searchValue.value) ||
+              searchValue.value.includes(item[props.keyField])
           })
         } else {
-          // 2、名称、拼音
+          // 2、名称、拼音(需要原始数据中包含拼音的字段，如 nameInitials)
           /^[a-zA-Z]+$/.test(searchValue.value)
           leftList.value = allList.filter((item) => {
-            return item.name.toUpperCase().includes(searchValue.value.toUpperCase()) ||
-             searchValue.value.toUpperCase().includes(item.name.toUpperCase())
+            const nameInitials = item.nameInitials
+            if (!nameInitials) return
+
+            return nameInitials.toUpperCase().includes(searchValue.value.toUpperCase()) ||
+             searchValue.value.toUpperCase().includes(nameInitials.toUpperCase())
           })
         }
       },
@@ -327,6 +331,13 @@ const useSearch = (emit, leftList, companyQuery, props) => {
 }
 </script>
 
+<style lang="scss">
+* {
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+</style>
 <style lang="scss" scoped>
 .public-transfer {
   display: flex;
@@ -413,5 +424,10 @@ const useSearch = (emit, leftList, companyQuery, props) => {
       margin-left: 20px;
     }
   }
+}
+.text_nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
