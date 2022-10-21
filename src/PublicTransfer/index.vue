@@ -291,10 +291,13 @@ const useSearch = (emit, leftList, companyQuery, props) => {
          */
 
         /**
-         * 因实际生产环境电脑配置较低，所以此本地搜索方式暂时废弃，改为接口 API 模糊搜索
+         * 应对低配置环境：采用远程 API 搜索方式。因实际生产环境电脑配置较低，所以此本地搜索方式暂时废弃，改为接口 API 模糊搜索
          */
         // emit('search', searchValue.value)
-
+        
+        /**
+         * 应对高配置环境：采用本地搜索方式
+         */
         const allList = getCompanyByIndustry(companyQuery.value, props.keyField)
         if (!searchValue.value) {
           leftList.value = allList
