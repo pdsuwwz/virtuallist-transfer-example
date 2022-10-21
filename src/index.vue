@@ -1,4 +1,5 @@
 <template>
+  <div>提示：最多选择{{ limit }} 个项目</div>
   <PublicTransfer
     v-model:right="transferRightList"
     :dataset="dataset"
@@ -23,18 +24,8 @@ export default defineComponent({
 import PublicTransfer from './PublicTransfer/index.vue'
 import { mockCompanyList } from './data'
 
-const dataset = ref([
-{
-    "code":"000001",
-    "name":"平安银行",
-    "nameInitials":"平安银行 PAYH",
-    "industry":[
-      "银行行业",
-      "二级",
-      "三级"
-    ]
-  }
-])
+const limit = ref(3)
+const dataset = ref([])
 const transferRightList = ref([])
 
 const getAllList = () => {
