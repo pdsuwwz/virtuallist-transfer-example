@@ -13,7 +13,8 @@ export default {
   output: {
     globals: {
       vue: 'Vue',
-      'element-plus': 'ElementPlus',
+      // 构建时已经将 element-plus 打入 js 中，所以暂时不需要使用 iife 定义全局变量了
+      // 'element-plus': 'ElementPlus',
     },
     format: 'umd',
     name: 'MyComponent',
@@ -46,12 +47,12 @@ export default {
       modules: {
         generateScopedName: '[local]___[hash:base64:5]',
       },
-      // extract: true, // 分离 scss | css 文件
+      extract: true, // 分离 scss | css 文件
       include: /&module=.*\.(s?)css$/
     }),
     // Process all `<style>` blocks except `<style module>`.
     PostCSS({
-      // extract: true, // 分离 scss | css 文件
+      extract: true, // 分离 scss | css 文件
       include: /(?<!&module=.*)\.(s?)css$/
     }),
   ]
