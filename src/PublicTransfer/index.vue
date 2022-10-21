@@ -45,7 +45,7 @@
       <div class="center-action">
         <el-button
           type="primary"
-          size="mini"
+          size="small"
           :disabled="!checkedLeftList.length"
           @click="handlePushRight()"
         >
@@ -57,7 +57,7 @@
       <div class="center-action">
         <el-button
           type="primary"
-          size="mini"
+          size="small"
           :disabled="!checkedRightList.length"
           @click="handlePushLeft()"
         >
