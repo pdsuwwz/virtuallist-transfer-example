@@ -1,6 +1,7 @@
 <template>
-  <div>提示：最多选择{{ limit }} 个项目</div>
+  <div>提示：最多选择 {{ limit }} 个项目</div>
   <PublicTransfer
+    v-loading="isLoading"
     v-model:right="transferRightList"
     :dataset="dataset"
     key-field="code"
@@ -21,12 +22,16 @@ export default defineComponent({
 </script>
 
 <script setup>
+// 使用 setup 语法糖注册自定义指令需要 as 重命名才能完成自动注册
+import { ElLoadingDirective as vLoading } from 'element-plus'
 import PublicTransfer from './PublicTransfer/index.vue'
 import { mockCompanyList } from './data'
 
 const limit = ref(3)
 const dataset = ref([])
 const transferRightList = ref([])
+
+const isLoading = ref(true)
 
 const getAllList = () => {
   setTimeout(() => {
@@ -40,6 +45,7 @@ const getAllList = () => {
       }
     ]
     dataset.value = mockCompanyList // 全量上市公司数据
+    isLoading.value = false
   }, 2000)
 }
 getAllList()
@@ -49,9 +55,5 @@ getAllList()
 </script>
 
 <style lang="scss">
-* {
-  border: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 </style>
