@@ -14,7 +14,7 @@
           v-model.trim="searchValue"
           placeholder="请输入名称/编号"
           clearable
-          prefix-icon="el-icon-search"
+          :prefix-icon="IconSearch"
         />
       </div>
       <div class="transfer-box-body">
@@ -119,7 +119,7 @@ import {
  // TODO: 不用 lodash 而用 lodash-es 的原因在于 lodash-es 可更好的用于 tree-shaking
 import { debounce } from 'lodash-es'
 
-import { ArrowRightBold, ArrowLeftBold } from '@element-plus/icons-vue'
+import { Search as IconSearch, ArrowRightBold, ArrowLeftBold } from '@element-plus/icons-vue'
 import { ElMessage, ElInput, ElIcon, ElButton } from 'element-plus'
 
 import TransferScroller from './TransferScroller.vue'
@@ -326,6 +326,7 @@ const useSearch = (emit, leftList, companyQuery, props) => {
     )
   )
   return {
+    IconSearch,
     searchValue
   }
 }
